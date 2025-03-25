@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+        input {
+            width: 100%;
+            max-width: 280px;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button, a {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            padding: 12px;
+            margin: 15px auto;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        .link-btn {
+            background-color: #3498db;
+        }
+        p {
+            margin: 10px 0;
+            font-size: 1em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Staff Login</h2>
+        <form action="staff_login.php" method="POST">
+            <input type="text" name="staffuniquecode" placeholder="Staff Unique Code" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit" name="login">Login</button>
+            <a href="signup.php" class="link-btn">Sign Up</a>
+        </form>
+        <p>For security reasons, passwords cannot be changed online. Please contact the administrator for assistance.</p>
+    </div>
+</body>
+</html>

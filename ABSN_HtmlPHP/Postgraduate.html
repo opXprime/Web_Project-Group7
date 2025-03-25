@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postgraduate Programs</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .programs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .programs-table th, .programs-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .programs-table th {
+            background-color: #f2f2f2;
+        }
+
+        .programs-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .suggestions {
+            position: absolute;
+            width: 100%;
+            background: white;
+            border: 1px solid #ddd;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+
+        .suggestions div {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suggestions div:hover {
+            background: #f1f1f1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            populateTable();
+        });
+
+        const programs = [
+            { ProgrammeName: "MSc Data Science", LevelID: 2, ProgrammeLeaderID: 13, Description: "Focuses on big data analytics, cloud computing, and AI-driven insights.", Link: "Msc_data_science.html" },
+            { ProgrammeName: "MSc Software Engineering", LevelID: 2, ProgrammeLeaderID: 15, Description: "Emphasizes software design, blockchain applications, and cutting-edge methodologies.", Link: "msc_software_eng.html" },
+            { ProgrammeName: "MSc Artificial Intelligence", LevelID: 2, ProgrammeLeaderID: 14, Description: "Explores autonomous systems, AI ethics, and deep learning technologies.", Link: "msc_artificial_int.html" },
+            { ProgrammeName: "MSc Cyber Security", LevelID: 2, ProgrammeLeaderID: 12, Description: "A specialized programme covering digital forensics, cyber threat intelligence, and security policy.", Link: "msc_cyber_security.html" },
+            { ProgrammeName: "MSc Machine Learning", LevelID: 2, ProgrammeLeaderID: 11, Description: "A postgraduate degree focusing on deep learning, AI ethics, and neural networks.", Link: "msc_machine_learning.html" }
+        ];
+
+        function populateTable() {
+            let tableBody = document.getElementById("programs-table-body");
+            tableBody.innerHTML = ""; // Clear table before repopulating
+
+            programs.forEach(program => {
+                let row = document.createElement("tr");
+                row.classList.add("program-row");
+
+                let cell1 = document.createElement("td");
+                let link = document.createElement("a");
+                link.href = program.Link;
+                link.textContent = program.ProgrammeName;
+                cell1.appendChild(link);
+                row.appendChild(cell1);
+
+                let cell2 = document.createElement("td");
+                cell2.textContent = program.LevelID;
+                row.appendChild(cell2);
+
+                let cell3 = document.createElement("td");
+                cell3.textContent = program.ProgrammeLeaderID;
+                row.appendChild(cell3);
+
+                let cell4 = document.createElement("td");
+                cell4.textContent = program.Description;
+                row.appendChild(cell4);
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        function searchProgram() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let rows = document.getElementsByClassName("program-row");
+
+            for (let i = 0; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName("td");
+                let programName = cells[0].innerText.toLowerCase();
+                if (programName.includes(input)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+
+            showSuggestions(input);
+        }
+
+        function showSuggestions(input) {
+            let suggestionsBox = document.getElementById("suggestionsBox");
+
+            if (input === "") {
+                suggestionsBox.style.display = "none";
+                return;
+            }
+
+            let filteredPrograms = programs.filter(program => program.ProgrammeName.toLowerCase().includes(input));
+
+            if (filteredPrograms.length === 0) {
+                suggestionsBox.style.display = "none";
+                return;
+            }
+
+            suggestionsBox.innerHTML = "";
+            filteredPrograms.forEach(program => {
+                let div = document.createElement("div");
+                div.textContent = program.ProgrammeName;
+                div.onclick = function () {
+                    document.getElementById("search").value = program.ProgrammeName;
+                    suggestionsBox.style.display = "none";
+                    searchProgram();
+                };
+                suggestionsBox.appendChild(div);
+            });
+
+            suggestionsBox.style.display = "block";
+        }
+
+        document.addEventListener("click", function (event) {
+            if (!event.target.closest(".search-container")) {
+                document.getElementById("suggestionsBox").style.display = "none";
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Postgraduate Programs</h1>
+        <div class="search-container">
+            <input type="text" id="search" onkeyup="searchProgram()" placeholder="Search for a program...">
+            <div id="suggestionsBox" class="suggestions"></div>
+        </div>
+
+        <table class="programs-table">
+            <thead>
+                <tr>
+                    <th>Programme Name</th>
+                    <th>Level ID</th>
+                    <th>Programme Leader ID</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="programs-table-body">
+                <!-- Program data will be populated here -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

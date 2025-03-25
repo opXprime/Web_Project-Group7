@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Courses</title>
+   
+    <link rel="stylesheet" href="C:\CTEC2025\EXER1\Undergraduate.html">
+    <link rel="stylesheet" href="C:\CTEC2025\EXER1\Postgraduate.html">
+    <link rel="stylesheet" href="EXER1/bsc_computer_science.html">
+    <link rel="stylesheet" href="C:\CTEC2025\EXER1\bsc_software_eng.html">
+    <link rel="stylesheet" href="C:\CTEC2025\EXER1\bsc_artificial_int.html">
+    
+    <style>
+        body {
+            background-image: url('img/group_p.jpg');
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            min-height: 100vh; 
+            color: white;
+        }
+
+        .course-options {
+            display: none;
+        }
+        
+        #courses:target .course-options {
+            display: block;
+        }
+
+        .btn {
+            display: block;
+            margin: 10px;
+            padding: 10px;
+            background-color: rgb(28, 4, 115);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            width: 150px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Our University</h1>
+      
+        <a href="#courses" class="btn">Courses</a> <br>
+       
+        <div id="courses">
+            <div class="course-options">
+                <a href="undergraduate.html" class="btn">Undergraduate</a>
+                <a href="postgraduate.html" class="btn">Postgraduate</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
